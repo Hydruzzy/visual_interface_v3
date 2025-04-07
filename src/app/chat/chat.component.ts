@@ -14,12 +14,20 @@ export class ChatComponent implements OnInit, AfterViewInit {
 
   messages: ChatMessage[] = [];
 
+  // 👇 Spielerliste für Sidebar
+  players = [
+    { name: 'Tom', class: 'player-tom' },
+    { name: 'Helena', class: 'player-helena' },
+    { name: 'Kyve', class: 'player-kyve' },
+    { name: 'Max', class: 'player-max' }
+  ];
+
   constructor(private chatService: ChatService) {}
 
   ngOnInit(): void {
     this.chatService.getChatMessages().subscribe(messages => {
       this.messages = messages;
-      setTimeout(() => this.scrollToBottom(), 100); // Scroll kurz nach Laden
+      setTimeout(() => this.scrollToBottom(), 100);
     });
   }
 

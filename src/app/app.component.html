@@ -2,21 +2,5 @@
     SECRET-HITLER SIMULATION
   </div>
   
-  <div class="layout-container">
-    <div class="sidebar">
-      <div class="sidebar-title">Players</div>
-      
-      <!-- Testzeile -->
-      <div class="player-count">{{ players.length }} Spieler geladen</div>
-  
-      <!-- Spielerliste -->
-      <div class="player" *ngFor="let player of players" [ngClass]="player.class">
-        <div class="avatar">{{ player.name.charAt(0).toUpperCase() }}</div>
-        <span>{{ player.name }}</span>
-      </div>
-    </div>
-  
-    <!-- Chat-Komponente -->
-    <app-chat></app-chat>
-  </div>
+  <router-outlet></router-outlet>
   
