@@ -1,17 +1,46 @@
-<div class="chat-container">
-  <div class="chat-header">
-    <h2>Discussion</h2>
+<div class="layout-container">
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="sidebar-title">Players</div>
+    <div class="player-count">{{ players.length }} Spieler geladen</div>
+    <div
+      class="player"
+      *ngFor="let player of players"
+      [ngClass]="player.class"
+    >
+      <div class="avatar">{{ player.name.charAt(0).toUpperCase() }}</div>
+      <span>{{ player.name }}</span>
+    </div>
   </div>
 
-  <div class="chat-messages" #messagesContainer>
-    <div *ngFor="let message of messages" [ngClass]="getClass(message.author)" class="message">
-      <div class="avatar" *ngIf="message.author !== 'system'">
-        {{ message.author.charAt(0).toUpperCase() }}
+  <!-- Chat -->
+  <div class="chat-container">
+    <h2 class="chat-header">Discussion</h2>
+    <div class="chat-messages" #messagesContainer>
+      <div
+        *ngFor="let message of messages"
+        [ngClass]="getClass(message.author)"
+        class="message"
+      >
+        <div class="avatar" *ngIf="message.author !== 'system'">
+          {{ message.author.charAt(0).toUpperCase() }}
+        </div>
+        <div class="message-content">
+          <div class="author" *ngIf="message.author !== 'system'">
+            {{ message.author }}:
+          </div>
+          <div class="text">{{ message.text }}</div>
+        </div>
       </div>
-      <div class="message-content">
-        <div class="author" *ngIf="message.author !== 'system'">{{ message.author }}:</div>
-        <div class="text">{{ message.text }}</div>
+    </div>
+
+    <!-- Thoughts unterhalb -->
+    <div class="thoughts-section">
+      <h2>Thoughts</h2>
+      <div *ngFor="let t of thoughts" class="thought-entry">
+        <h3>{{ t.author }}</h3>
+        <pre>{{ t.text }}</pre>
       </div>
     </div>
   </div>
-  
+</div>

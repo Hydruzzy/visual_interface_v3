@@ -210,3 +210,33 @@ body, html {
     }
   }
 }
+
+.thoughts-section {
+  margin-top: 3rem;
+  background: #2a2a2a;
+  padding: 1.5rem;
+  border-radius: 12px;
+  color: #eee;
+
+  h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .thought-entry {
+    margin-bottom: 2rem;
+
+    h3 {
+      color: #fcd36a;
+      margin-bottom: 0.5rem;
+      font-size: 1.2rem;
+    }
+
+    pre {
+      white-space: pre-wrap;
+      font-family: 'Montserrat', sans-serif;
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }
+  }
+}
