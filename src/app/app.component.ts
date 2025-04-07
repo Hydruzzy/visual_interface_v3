@@ -1,12 +1,19 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { ChatComponent } from './chat/chat.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  standalone: true,
+  imports: [CommonModule, ChatComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'visual_interface_v3';
+  players = [
+    { name: 'Tom', class: 'player-tom' },
+    { name: 'Helena', class: 'player-helena' },
+    { name: 'Kyve', class: 'player-kyve' },
+    { name: 'Max', class: 'player-max' }
+  ];
 }

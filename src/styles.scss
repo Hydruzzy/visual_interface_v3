@@ -1,1 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+/* Globale Styles */
+/* Global Styles */
+* {
+    box-sizing: border-box;
+  }
+  
+  html, body {
+    margin: 0;
+    padding: 0;
+    background-color: #2e2824; // Dunkler Hintergrund (wie auf dem Screenshot gewünscht)
+    font-family: 'Montserrat', sans-serif;
+  }
+  
