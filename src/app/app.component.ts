@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ChatComponent } from './chat/chat.component';
+import { ThoughtsComponent } from './thoughts/thoughts.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, ChatComponent],
+  imports: [CommonModule, ChatComponent, ThoughtsComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
@@ -17,3 +18,5 @@ export class AppComponent {
     { name: 'Max', class: 'player-max' }
   ];
 }
+
+
