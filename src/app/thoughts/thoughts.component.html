@@ -1,0 +1,10 @@
+<div class="thoughts-container">
+    <h2>Thoughts</h2>
+    <div class="thoughts-grid">
+      <div class="thought-card" *ngFor="let thought of thoughts">
+        <h3>{{ thought.name }}</h3>
+        <div class="thought-box" [innerHTML]="thought.text"></div>
+      </div>
+    </div>
+  </div>
+  
