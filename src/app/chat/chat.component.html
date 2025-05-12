@@ -28,13 +28,20 @@
     </div>
 
     <!-- Bildnachricht -->
-    <div *ngIf="message.type === 'image'" class="message image-message">
+    <div *ngIf="message.type === 'image'" class="image-message">
       <img [src]="message.image" alt="Policy card" />
       <div class="timestamp" *ngIf="message.time !== undefined">🕒 {{ message.time }}</div>
     </div>
 
+    <!-- Voting (mehrere Bilder) -->
+    <div *ngIf="message.type === 'voting'" class="voting-message">
+      <div class="vote-images">
+        <img *ngFor="let vote of message.votes" [src]="vote" alt="Vote" />
+      </div>
+      <div class="timestamp" *ngIf="message.time !== undefined">
+        🕒 {{ message.time }}
+      </div>
+    </div>
+
   </ng-container>
 </div>
-
-
-
