@@ -3,11 +3,14 @@ import { CommonModule } from '@angular/common';
 import { GameService } from '../services/game.service';
 import { FormsModule } from '@angular/forms';
 
+type MessageType = 'text' | 'image' | 'voting';
+
 interface ChatMessage {
   author: string;
   text?: string;
   image?: string;
-  type: 'text' | 'image';
+  votes?: string[];
+  type: MessageType;
   time?: number;
 }
 
@@ -39,15 +42,15 @@ export class ChatComponent implements OnInit {
       data.forEach((msg: any) => {
         const lowerMsg = msg.message.toLowerCase();
 
-        // Textnachricht hinzufügen
+        // Standard Textnachricht
         this.messages.push({
           author: msg.agentName,
           text: msg.message,
-          time: msg.time,
-          type: 'text'
+          type: 'text',
+          time: msg.time
         });
 
-        // Bildnachricht bei bestimmten Schlüsselwörtern
+        // Policy-Bilder
         if (lowerMsg.includes('policy liberal')) {
           this.messages.push({
             author: 'system',
@@ -62,6 +65,26 @@ export class ChatComponent implements OnInit {
             author: 'system',
             image: 'assets/policy_fascist.png',
             type: 'image',
+            time: msg.time
+          });
+        }
+
+        // Voting-Ergebnisse (Mehrfachbilder)
+        if (lowerMsg.includes('result of voting for')) {
+          const yesMatch = msg.message.match(/yes:\s*(\d+)/i);
+          const noMatch = msg.message.match(/no:\s*(\d+)/i);
+          const yesCount = yesMatch ? parseInt(yesMatch[1], 10) : 0;
+          const noCount = noMatch ? parseInt(noMatch[1], 10) : 0;
+
+          const voteImages = [
+            ...Array(yesCount).fill('assets/voting_ja.png'),
+            ...Array(noCount).fill('assets/voting_nein.png'),
+          ];
+
+          this.messages.push({
+            author: 'system',
+            votes: voteImages,
+            type: 'voting',
             time: msg.time
           });
         }
