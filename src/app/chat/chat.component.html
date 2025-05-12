@@ -1,17 +1,25 @@
-<div class="chat-container">
-  <div class="chat-header">
-    <h2>Messages</h2>
-  </div>
+<div class="chat-header">
+  <h2>Messages</h2>
 
-  <div class="chat-messages" #messagesContainer>
-    <div *ngFor="let message of messages" [ngClass]="getClass(message.author)" class="message">
-      <div class="avatar" *ngIf="message.author !== 'system'">
-        {{ message.author.charAt(0).toUpperCase() }}
-      </div>
-      <div class="message-content">
-        <div class="author" *ngIf="message.author !== 'system'">{{ message.author }}:</div>
-        <div class="text">{{ message.text }}</div>
-      </div>
+  <label for="gameSelect" style="color: white;">Select Game:</label>
+  <select id="gameSelect" [(ngModel)]="selectedGameId" (change)="onGameSelected()">
+    <option value="" disabled selected>Select a game ID</option>
+    <option *ngFor="let id of gameIds" [value]="id">{{ id }}</option>
+  </select>
+</div>
+
+<div class="chat-messages" *ngIf="messages.length > 0">
+  <div
+    *ngFor="let message of messages"
+    class="message"
+    [ngStyle]="{ backgroundColor: getColor(message.author) }"
+  >
+    <div class="avatar" [ngStyle]="{ backgroundColor: getColor(message.author) }">
+      {{ message.author.charAt(0).toUpperCase() }}
+    </div>
+    <div class="message-content">
+      <div class="author">{{ message.author }}:</div>
+      <div class="text">{{ message.text }}</div>
     </div>
   </div>
 </div>
