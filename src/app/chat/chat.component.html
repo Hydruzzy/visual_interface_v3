@@ -1,17 +1,45 @@
-<div class="chat-container">
-  <div class="chat-header">
-    <h2>Discussion</h2>
-  </div>
+<div class="chat-header">
+  <h2>Messages</h2>
 
-  <div class="chat-messages" #messagesContainer>
-    <div *ngFor="let message of messages" [ngClass]="getClass(message.author)" class="message">
-      <div class="avatar" *ngIf="message.author !== 'system'">
+  <label for="gameSelect" style="color: white;">Select Game:</label>
+  <select id="gameSelect" [(ngModel)]="selectedGameId" (change)="onGameSelected()">
+    <option value="" disabled selected>Select a game ID</option>
+    <option *ngFor="let id of gameIds" [value]="id">{{ id }}</option>
+  </select>
+</div>
+
+<div class="chat-messages" *ngIf="messages.length > 0">
+  <ng-container *ngFor="let message of messages">
+
+    <!-- Textnachricht -->
+    <div
+      *ngIf="message.type === 'text'"
+      class="message"
+      [ngStyle]="{ backgroundColor: getColor(message.author) }"
+    >
+      <div class="avatar" [ngStyle]="{ backgroundColor: getColor(message.author) }">
         {{ message.author.charAt(0).toUpperCase() }}
       </div>
       <div class="message-content">
-        <div class="author" *ngIf="message.author !== 'system'">{{ message.author }}:</div>
+        <div class="author">{{ message.author }}:</div>
         <div class="text">{{ message.text }}</div>
+        <div class="timestamp" *ngIf="message.time !== undefined">🕒 {{ message.time }}</div>
       </div>
     </div>
-  </div>
-  
+
+    <!-- Policy-Bildnachricht -->
+    <div *ngIf="message.type === 'image'" class="image-message">
+      <img [src]="message.image" alt="Policy card" />
+      <div class="timestamp" *ngIf="message.time !== undefined">🕒 {{ message.time }}</div>
+    </div>
+
+    <!-- Voting-Bildnachricht -->
+    <div *ngIf="message.type === 'image-list'" class="image-message">
+      <div class="image-list">
+        <img *ngFor="let img of message.images" [src]="img" alt="Vote" />
+      </div>
+      <div class="timestamp" *ngIf="message.time !== undefined">🕒 {{ message.time }}</div>
+    </div>
+
+  </ng-container>
+</div>
