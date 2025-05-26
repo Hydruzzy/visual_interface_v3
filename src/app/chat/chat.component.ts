@@ -28,7 +28,7 @@ export class ChatComponent implements OnInit {
 
   ngOnInit(): void {
     this.gameService.getGameList().subscribe((games: any[]) => {
-      this.gameIds = games.map(g => g._id);
+      this.gameIds = games.filter(g => g.result !== undefined && g.result !== null).map(g => g._id);
     });
   }
 
